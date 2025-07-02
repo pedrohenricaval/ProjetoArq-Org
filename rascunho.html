@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assembly RISC-V</title>
+</head>
+<body>
+  <main>
+    <h1>Assembly RISC-V</h1>
+    <p>Assembly é uma linguagem de programação muito próxima à de máquina.</p>
+
+    <h2>Estrutura básica</h2>
+    <p>O assembly RISC-V é feito por rótulos, diretivas e comandos.</p>
+
+    <section>
+      <h3>Rótulos</h3>
+      <ul>
+        <li>Rótulos são identificadores que marcam uma posição no código.</li>
+        <li>Eles são usados para referenciar locais no código.</li>
+        <li>Todos os rótulos são criados pelo programador.</li>
+      </ul>
+
+      <h4>Criar rótulo</h4>
+      <pre><code>nome_do_rotulo:</code></pre>
+
+      <h4>Referir à um rótulo</h4>
+      <pre><code>nome_do_rotulo</code></pre>
+      <p>O programa irá para a linha onde o rótulo foi criado.</p>
+    </section>
+
+    <section>
+      <h3>Diretivas</h3>
+
+      <h4>Iniciar segmento de dados</h4>
+      <pre><code>.data</code></pre>
+      <ul>
+        <li>Define que o que vem a seguir é o segmento de dados.</li>
+        <li>Segmento de dados é onde são armazenadas as variáveis estáticas.</li>
+      </ul>
+
+      <h4>Iniciar segmento de texto</h4>
+      <pre><code>.text</code></pre>
+      <ul>
+        <li>Define que o que vem a seguir é o segmento de texto.</li>
+        <li>O segmento de texto é onde é colocado o código-fonte.</li>
+        <li>O código é executado sequencialmente.</li>
+      </ul>
+
+      <h4>Alocar espaço</h4>
+      <pre><code>.space quantidade_de_bytes</code></pre>
+      <ul>
+        <li>Reserva um espaço na memória e o preenche com 0s.</li>
+        <li>Normalmente usado para reservar espaço para buffers e variáveis.</li>
+      </ul>
+
+      <h4>Declarar global</h4>
+      <pre><code>.globl rotulo</code></pre>
+      <ul>
+        <li>Declara <code>rotulo</code> como global.</li>
+        <li>Um rótulo global pode ser acessado por outros módulos ou arquivos assembly.</li>
+      </ul>
+
+      <h4>Alinhar rótulo</h4>
+      <pre><code>.align numero</code></pre>
+      <ul>
+        <li>Alinha um rótulo ou instrução em um limite específico da memória.</li>
+        <li>Garante que os dados comecem em um endereço múltiplo de um valor específico.</li>
+      </ul>
+
+      <h4>Declarar tipo de dado</h4>
+      <pre><code>rotulo_nome: .tipo_de_dado valor</code></pre>
+    </section>
+
+    <section>
+      <h2>Instruções</h2>
+
+      <h3>Comandos Condicionais</h3>
+      <ul>
+        <li>
+          <strong>Branch if not Equal</strong>
+          <pre><code>bne x1, x2, label</code></pre>
+          <p>Compara dois registradores. Se eles não forem iguais, o programa é redirecionado à <code>label</code>.</p>
+        </li>
+        <li>
+          <strong>Branch if Equal</strong>
+          <pre><code>beq x1, x2, label</code></pre>
+          <p>Compara dois registradores. Se forem iguais, o programa é redirecionado à <code>label</code>.</p>
+        </li>
+        <li>
+          <strong>Branch if Less Than</strong>
+          <pre><code>blt x1, x2, label</code></pre>
+          <p>Se <code>x1</code> for menor que <code>x2</code>, o programa vai para <code>label</code>.</p>
+        </li>
+        <li>
+          <strong>Branch if Less Than or Equal</strong>
+          <pre><code>ble x1, x2, label</code></pre>
+          <p>Se <code>x1</code> for menor ou igual a <code>x2</code>, o programa vai para <code>label</code>.</p>
+        </li>
+      </ul>
+
+      <h3>Comandos Aritméticos</h3>
+      <ul>
+        <li>
+          <strong>Negate</strong>
+          <pre><code>neg rd, rs1</code></pre>
+          <p>Nega o valor de <code>rs1</code> e armazena em <code>rd</code>.</p>
+        </li>
+        <li>
+          <strong>Soma Immediate</strong>
+          <pre><code>addi rd, rs1, imm</code></pre>
+          <p>Soma <code>imm</code> com <code>rs1</code> e armazena em <code>rd</code>.</p>
+        </li>
+        <li>
+          <strong>Soma Register</strong>
+          <pre><code>add rd, rs1, rs2</code></pre>
+          <p>Soma os valores de <code>rs1</code> e <code>rs2</code> e armazena em <code>rd</code>.</p>
+        </li>
+        <li>
+          <strong>Resto</strong>
+          <pre><code>rem rd, rs1, rs2</code></pre>
+          <p>Armazena em <code>rd</code> o resto da divisão de <code>rs1</code> por <code>rs2</code>.</p>
+        </li>
+        <li>
+          <strong>Multiplicação</strong>
+          <pre><code>mul rd, rs1, rs2</code></pre>
+          <p>Multiplica <code>rs1</code> por <code>rs2</code> e armazena o resultado em <code>rd</code>.</p>
+        </li>
+        <li>
+          <strong>Divisão</strong>
+          <pre><code>div rd, rs1, rs2</code></pre>
+          <p>Divide <code>rs1</code> por <code>rs2</code> e armazena o resultado em <code>rd</code>.</p>
+        </li>
+        <li>
+          <strong>Subtração</strong>
+          <pre><code>sub rd, rs1, rs2</code></pre>
+          <p>Subtrai <code>rs2</code> de <code>rs1</code> e armazena o resultado em <code>rd</code>.</p>
+        </li>
+      </ul>
+
+      <h3>Acesso à Memória</h3>
+      <h4>Store</h4>
+      <pre><code>
+sb rd, offset(rs1)  // 1 byte  
+sw rd, offset(rs1)  // 4 bytes (word)  
+sf rd, offset(rs1)  // 4 bytes (float)
+</code></pre>
+      <p>Carrega dados de <code>rd</code> na memória principal.</p>
+      <p><strong>Legenda:</strong></p>
+      <ul>
+        <li><code>rd</code>: registrador cujos dados serão armazenados.</li>
+        <li><code>offset(rs1)</code>: endereço de memória baseado em <code>rs1</code> com deslocamento.</li>
+        <li><code>offset</code>: quantidade de bytes pulados.</li>
+        <li><code>rs1</code>: registrador base com endereço.</li>
+      </ul>
+      <pre><code>sf x1, 5(x2)</code></pre>
+
+      <h4>Load</h4>
+      <pre><code>
+lb rd, offset(rs1)  // 1 byte  
+lw rd, offset(rs1)  // 4 bytes (word)  
+lf rd, offset(rs1)  // 4 bytes (float)
+</code></pre>
+      <p>Carrega dados da memória principal para <code>rd</code>.</p>
+
+      <h4>Load Address</h4>
+      <pre><code>la rd, label</code></pre>
+      <p>Armazena o endereço de <code>label</code> em <code>rd</code>. É uma pseudo-instrução traduzida pelo assembler.</p>
+
+      <h4>Load Immediate</h4>
+      <pre><code>li rd, imm</code></pre>
+      <p>Armazena <code>imm</code> em <code>rd</code>. É pseudo-instrução, geralmente traduzida para <code>addi</code> ou outro(s) comandos.</p>
+
+      <h3>Controle de Fluxo</h3>
+      <p>Comandos que redirecionam o programa para outro ponto do código.</p>
+
+      <h4>Jump</h4>
+      <pre><code>
+j offset  
+j label
+</code></pre>
+      <p>Salto incondicional para endereço ou <code>label</code>.</p>
+
+      <h4>Jump and Link</h4>
+      <pre><code>
+jal ra, offset  
+jal ra, label
+</code></pre>
+      <p>Armazena endereço do próximo elemento em <code>ra</code> e salta para <code>label</code>.</p>
+
+      <h4>Jump and Link Register</h4>
+      <pre><code>jalr ra, offset(rs1)</code></pre>
+      <p>Salta para o endereço baseado em <code>rs1 + offset</code> e armazena o retorno em <code>ra</code>.</p>
+
+      <h4>Jump Register</h4>
+      <pre><code>jr ra</code></pre>
+      <p>Salta para o endereço armazenado em <code>ra</code>. Usado para retornar de funções.</p>
+      <p><strong>Exemplo:</strong> após um <code>jal</code>, o <code>jr ra</code> retorna ao ponto seguinte.</p>
+
+      <h4>Return</h4>
+      <pre><code>ret</code></pre>
+      <p>Usado em sub-rotinas. Volta ao programa principal. É pseudo-instrução equivalente a:</p>
+      <pre><code>jalr x0, 0(ra)</code></pre>
+      <ul>
+        <li><code>x0</code> sempre vale 0 e é imutável.</li>
+        <li>Retorna ao endereço em <code>ra</code> (geralmente <code>x1</code>).</li>
+        <li>Requer que <code>jal</code> tenha usado <code>ra</code>.</li>
+      </ul>
+
+      <h3>Instrução de Sistema</h3>
+      <pre><code>ecall</code></pre>
+      <ul>
+        <li>Usado para realizar ações privilegiadas.</li>
+        <li>A ação depende do valor em <code>a7</code>.</li>
+        <li>Outros registradores podem ser usados como entrada/saída.</li>
+        <li><strong>Exemplo:</strong> <code>a7 = 4</code> imprime string de <code>a0</code>.</li>
+      </ul>
+      <p>Importante distinguir funções que retornam valores das que retornam o endereço do valor.</p>
+      <p>A seguinte tabela define os comportamentos de <code>ecall</code>.</p>
+      <img src="./ecallTable.png">
+    </section>
+  </main>
+</body>
+</html>
